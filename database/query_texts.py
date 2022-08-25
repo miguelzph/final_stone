@@ -25,8 +25,10 @@ QUERY_PRODUCTS = """
         
        
 QUERY_SALES = """
-    select
+    SELECT
         *
-    from 
-       sale
+    FROM 
+       sales_complete
+    WHERE
+        card_id <> 0 
 """
