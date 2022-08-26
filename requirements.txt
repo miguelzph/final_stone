@@ -62,7 +62,6 @@ python-dateutil==2.8.2
 python-dotenv==0.20.0
 pytz==2022.2.1
 pytz-deprecation-shim==0.1.0.post0
-pywin32==304
 PyYAML==6.0
 pyzmq==23.2.1
 requests==2.27.1
