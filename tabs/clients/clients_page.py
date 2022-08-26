@@ -1,12 +1,12 @@
 import streamlit as st
-from tabs.helper_func import cohort_analysis, add_time_columns, generate_velocimeter_fig, calculate_has_more_than_one_buy
+from tabs.clients import helper
 import plotly.graph_objects as go
 
 def show_clients_page(tab, data):
 
     with tab:
         
-        data = add_time_columns(data)
+        data = helper.add_time_columns(data)
         
         # link afiliado
         link = 'https://www.collact.com.br/fale-com-especialista?utm_source=teste'
@@ -19,39 +19,34 @@ def show_clients_page(tab, data):
         
         col1, col2, col3 = st.columns(3)
         with col1:
-            percentage_has_more_than_one_buy = calculate_has_more_than_one_buy(data)
+            percentage_has_more_than_one_buy = helper.calculate_has_more_than_one_buy(data)
             text = "Compraram mais de uma vez no mês"
-            fig = generate_velocimeter_fig(percentage_has_more_than_one_buy, text)
+            fig = helper.generate_velocimeter_fig(percentage_has_more_than_one_buy, text)
             
             st.plotly_chart(fig, use_container_width=True)
         
         with col2:
-            fig = go.Figure(go.Indicator(
-            mode = "number+delta",
-            value = 400,
-            delta = {'position': "bottom", 'reference': 0}, # nao ha dados anteriores
-            domain = {'x': [0, 1], 'y': [0, 1]},
-            title = {'text': 'Quantidade de novos clientes'}))
-
-            fig.update_layout(paper_bgcolor = "lightgray")
+            new_clients = 2000
+            text = "Novos clientes no mês"
+            fig = helper.generate_card_fig(new_clients, text)
             st.plotly_chart(fig, use_container_width=True)
             
         with col3:
-            
-            percentage_has_more_than_one_buy = calculate_has_more_than_one_buy(data)
-            text = "Quantidade de novos"
-            fig = generate_velocimeter_fig(percentage_has_more_than_one_buy, text)
+            returned_from_last_week = helper.calculate_returned_from_last_week(data)
+            fig = helper.generate_returned_from_last_week_plot(returned_from_last_week)
 
             st.plotly_chart(fig, use_container_width=True)
-
+        
         
         st.markdown("""---""") 
         
         col1, col2 = st.columns(2)
         with col1:
             st.subheader('Cohort Semanal: Retenção de usuário')
-            cohort_analysis(data)
+            helper.cohort_analysis(data)
         
         with col2:
             st.subheader('Como interpretar a análise de Cohort?')
             st.video('https://www.youtube.com/watch?v=GolJlR_KZuU')
+            
+            

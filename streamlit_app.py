@@ -3,8 +3,8 @@ import streamlit as st
 from database.query_texts import QUERY_PRODUCTS, QUERY_SALES
 from database.query_functions import query_data
 
-from tabs.products import show_products_page
-from tabs.clients_page import show_clients_page
+from tabs.products.products import show_products_page
+from tabs.clients.clients_page import show_clients_page
 
 
 
@@ -17,7 +17,8 @@ welcolme_page, clients_page, products_page = st.tabs(['Bem Vindo!', 'Clientes', 
 if __name__ == '__main__':
     
     with welcolme_page:
-        st.write('Ola!')
+        st.subheader('Ola! ...')
+        st.write('Vídeo Explicativo:')
             
     data_for_products_page = query_data(QUERY_PRODUCTS)
     show_products_page(products_page, data_for_products_page)
