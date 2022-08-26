@@ -16,11 +16,11 @@ def query_data(query):
         pd.DataFrame: Retorna um dataframe com o resultado na query
     """
         
-    host = os.getenv("HOST")
-    port = os.getenv("PORT")
-    database = os.getenv("DATABASE")
+    host = os.getenv("DB_HOST")
+    port = os.getenv("DB_PORT")
+    database = os.getenv("DB_DATABASE")
     username = os.getenv("DB_USERNAME")
-    password = os.getenv("PASSWORD")
+    password = os.getenv("DB_PASSWORD")
 
     conn = psycopg2.connect(host=host, 
                 port=port, 
